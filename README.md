@@ -1,6 +1,11 @@
 # Discord-Stock-Bot
 
-Currently supports stock quotes during regular trading hours. To use simply write a stock ticker in chat like such "$TSLA". Also supports multiple tickers in 1 message "$TSLA $FDs"
+To use simply write a stock ticker in chat like such "$TSLA". Also supports multiple tickers in 1 message "$TSLA $FDs"
+
+Example Output:
+![OutputImage.png](https://i.imgur.com/bH4G98X.png)
+
+Currently supports stock quotes during regular trading hours.
 
 [Data provided by IEXTrading](https://iextrading.com/developer/docs/#quote)
 
