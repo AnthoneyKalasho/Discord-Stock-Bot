@@ -17,6 +17,7 @@ For the time being development is halted, but if you'd like to contribute, make 
   - [Discord API Python wrapper (Rewrite verison)](https://stackoverflow.com/questions/50686388/how-to-install-discord-py-rewrite)
   - [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/) (pip install beautifulsoup4)
   - [Requests](http://docs.python-requests.org/en/master/) (pip install requests)
+  - [pytz](http://pytz.sourceforge.net/)
 3. [Create a bot profile through Discord developer portal](https://discordapp.com/developers/applications/)
 4. Generate a token on the "Bot" page and input it for the TOKEN variable in stockBot.py
 5. Run stockBot.py
