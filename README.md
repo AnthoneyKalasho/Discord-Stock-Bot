@@ -10,7 +10,7 @@ Planned Additions:
 
 For the time being development is halted, but if you'd like to contribute, make a pull request and I'll push it through
 
-# Usage instructions
+# Instructions
 
 1. [Install any version of Python 3](https://www.python.org/downloads/)
 2. Install following dependencies:
