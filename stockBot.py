@@ -5,8 +5,8 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, time, date
 
-TOKEN = 'INSERT TOKEN HERE'
-
+#TOKEN = 'INSERT TOKEN HERE'
+#UNCOMMENT OR SET TOKEN THROUGH HEROKU
 client = discord.Client()
 pattern = re.compile(r'\$([^\s]+)')
 
