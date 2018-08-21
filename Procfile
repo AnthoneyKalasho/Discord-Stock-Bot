@@ -1,1 +1,1 @@
-web: python stockBot.py
+worker: python stockBot.py
