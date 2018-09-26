@@ -4,9 +4,7 @@ import requests
 import json
 from datetime import datetime, time, date
 
-secrets = json.loads(open('secrets.json').read())
-TOKEN = secrets["discordToken"]
-print('starting pystonk...')
+TOKEN = os.environ['TOKEN']
 
 client = discord.Client()
 pattern = re.compile(r'\$([^\s]+)')
