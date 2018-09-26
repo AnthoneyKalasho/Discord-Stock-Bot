@@ -83,6 +83,6 @@ async def on_message(message):
                                           " -> (" + changeString
                                           + " / " + marketPercentString
                                           + ")", color=0x006BB6)
-                await client.send(embed=embed)
+                await message.channel.client.send(embed=embed)
 
 client.run(TOKEN)
