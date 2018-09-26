@@ -3,6 +3,7 @@ import re
 import requests
 import json
 from datetime import datetime, time, date
+import os
 
 TOKEN = os.environ['TOKEN']
 #TOKEN = "COMMENT OUT ABOVE LINE AND PUT YOUR TOKEN HERE"
