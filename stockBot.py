@@ -5,7 +5,7 @@ import json
 from datetime import datetime, time, date
 
 TOKEN = os.environ['TOKEN']
-
+#TOKEN = "COMMENT OUT ABOVE LINE AND PUT YOUR TOKEN HERE"
 client = discord.Client()
 pattern = re.compile(r'\$([^\s]+)')
 
