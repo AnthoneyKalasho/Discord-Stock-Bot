@@ -35,7 +35,7 @@ async def on_message(message):
                 if (5 <= (now.hour + (now.minute/60)) <= 6.5) or (13 <= (now.hour + (now.minute/60)) <= 14):
                     extendedPrice = json_string["extendedPrice"]
                     extendedChange = json_string["extendedChange"]
-                    extendedChangePercent = json_string["extendedChangePercent"]
+                    extendedChangePercent = round(json_string["extendedChangePercent"] * 100, 3)
                     if extendedChangePercent >= 0:
                         positive = "+"
                     else:
