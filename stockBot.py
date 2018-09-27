@@ -44,7 +44,7 @@ async def on_message(message):
                 if (5 <= (now.hour + (now.minute/60)) <= 6.5):
                     marketTime = "PM"
                     extendedHours = True
-                elif (13 <= now.hour + <= 14):
+                elif (13 <= now.hour <= 14):
                     marketTime = "AH"
                     extendedHours = True
 
