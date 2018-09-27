@@ -14,7 +14,7 @@ pattern = re.compile(r'\$([^\s]+)')
 @client.event
 async def on_message(message):
     now = datetime.now()
-    if (now.weekday() < 5) and (5 <= now.hour <= 14):
+    if (now.weekday() < 5) and (5 <= (now.hour + (now.minute/60)) <= 14):
         if message.author == client.user:
             return
         for m in re.findall(pattern, message.content):
@@ -44,7 +44,7 @@ async def on_message(message):
                 if (5 <= (now.hour + (now.minute/60)) <= 6.5):
                     marketTime = "PM"
                     extendedHours = True
-                elif (13 <= now.hour <= 14):
+                elif (13 <= (now.hour + (now.minute/60)) <= 14):
                     marketTime = "AH"
                     extendedHours = True
 
