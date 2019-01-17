@@ -27,7 +27,6 @@ async def on_message(message):
                 symbol = json_string["symbol"]
                 companyName = json_string["companyName"]
                 marketPercent = round(json_string["changePercent"] * 100, 3)
-                marketPercentString = str(marketPercent)
                 latestPrice = json_string["latestPrice"]
                 change = round(json_string["change"], 3)
                 extendedHours = False
