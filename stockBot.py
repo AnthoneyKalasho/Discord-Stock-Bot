@@ -92,7 +92,8 @@ async def on_message(message: discord.message.Message):
                     await message.channel.send(embed=embed)
 
         else:
-            await message.channel.send("Market is closed ya retard. Go do something else.")
+            if re.match(pattern_quote, message.content):
+                await message.channel.send("Market is closed ya retard. Go do something else.")
 
 
 @client.event
