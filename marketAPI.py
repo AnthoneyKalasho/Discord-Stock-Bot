@@ -15,7 +15,7 @@ def get_basic_quote(ticker: str) -> discord.Embed:
     :return: discord.Embed object containing message to be sent back to server
     """
 
-    page = requests.get('https://api.iextrading.com/1.0/stock/' + ticker + '/quote')
+    page = requests.get('https://api.iextrading.com/1.0/stock/' + ticker.replace('+','').replace('$','') + '/quote')
     json_string = json.loads(page.text)
     symbol = json_string["symbol"]
     companyName = json_string["companyName"]
@@ -88,7 +88,7 @@ def get_extended_quote(ticker: str) -> discord.Embed:
     :return: discord.Embed object containing message to be sent back to server
     """
 
-    page = requests.get('https://api.iextrading.com/1.0/stock/' + ticker.replace('+','') + '/quote')
+    page = requests.get('https://api.iextrading.com/1.0/stock/' + ticker.replace('+','').replace('$','') + '/quote')
     json_string = json.loads(page.text)
     symbol = json_string["symbol"]
     companyName = json_string["companyName"]
