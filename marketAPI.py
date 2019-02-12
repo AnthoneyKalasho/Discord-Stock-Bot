@@ -81,6 +81,7 @@ def get_basic_quote(ticker: str) -> discord.Embed:
 
     return discord.Embed(title=title, url=url, description=description, color=0x006BB6)
 
+
 def get_extended_quote(ticker: str) -> discord.Embed:
     """
     Returns a discord.Embed object with extended quote info.
@@ -153,3 +154,27 @@ def get_extended_quote(ticker: str) -> discord.Embed:
                                ")"])
 
     return discord.Embed(title=title, url=url, description=description, color=0x006BB6)
+
+def get_halt_status(ticker: str) -> discord.Embed:
+    """
+
+    :param ticker: stock ticker string (e.g. 'spy')
+    :return:
+    """
+
+    raw_data = requests.get('https://api.iextrading.com/1.0/deep/op-halt-status?symbols=' + ticker)
+    json_string = json.loads(raw_data.text)[ticker.upper()]
+    isHalted = json_string['isHalted']
+    timestamp = datetime.utcfromtimestamp(1549943089).strftime('%Y-%m-%d %H:%M:%S')
+
+    raw_data = requests.get('https://api.iextrading.com/1.0/stock/' + ticker + '/quote')
+    json_string = json.loads(raw_data.text)
+    symbol = json_string["symbol"]
+
+    companyName = json_string["companyName"]
+    title = "".join([companyName, " ($", symbol, ")"])
+    url = "https://www.tradingview.com/symbols/" + symbol
+    description = "Halted at %s".format(timestamp) if isHalted else "Not halted, so go buy some FDs."
+
+    return discord.Embed(title=title, url=url, description=description)
+

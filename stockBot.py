@@ -9,7 +9,7 @@ import os
 
 TOKEN = os.environ['TOKEN']
 #TOKEN = "YOUR TOKEN HERE"
-client = discord.Client()
+client = commands.Bot(command_prefix='!')
 pattern_quote = re.compile(r'[$]([A-Za-z]+)[+]?')
 
 
@@ -17,6 +17,9 @@ pattern_quote = re.compile(r'[$]([A-Za-z]+)[+]?')
 async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game("with Stonks"))
 
+@client.command()
+async def halted(ctx, ticker):
+    await ctx.send(embed=api.get_halt_status(ticker))
 
 @client.event
 async def on_message(message: discord.message.Message):
@@ -26,7 +29,7 @@ async def on_message(message: discord.message.Message):
 
         if utils.should_parse_message(matches_len):
             for m in matches:
-                if '+' in m:
+                if m[-1] == '+':
                     embed = api.get_extended_quote(m)
                     await message.channel.send(embed=embed)
                 else:
@@ -36,6 +39,8 @@ async def on_message(message: discord.message.Message):
         else:
             if matches_len > 0:
                 await message.channel.send("Market is closed ya retard. Go do something else.")
+            else:
+                await client.process_commands(message)
 
 
 @client.event
