@@ -10,7 +10,7 @@ import os
 TOKEN = os.environ['TOKEN']
 #TOKEN = "YOUR TOKEN HERE"
 client = discord.Client()
-pattern_quote = re.compile(r'[$]([A-Za-z]+)[\S]*')
+pattern_quote = re.compile(r'[$]([A-Za-z]+)[+]?')
 
 
 @client.event
@@ -26,8 +26,9 @@ async def on_message(message: discord.message.Message):
 
         if utils.should_parse_message(matches_len):
             for m in matches:
-                if not m.isalpha():
-                    return
+                if '+' in m:
+                    embed = api.get_extended_quote(m)
+                    await message.channel.send(embed=embed)
                 else:
                     embed = api.get_basic_quote(m)
                     await message.channel.send(embed=embed)
