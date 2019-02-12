@@ -10,7 +10,7 @@ import os
 TOKEN = os.environ['TOKEN']
 #TOKEN = "YOUR TOKEN HERE"
 client = discord.Client()
-pattern_quote = re.compile(r'\$([^\s]+)')
+pattern_quote = re.compile(r'[$]([A-Za-z]+)[\S]*')
 
 
 @client.event
