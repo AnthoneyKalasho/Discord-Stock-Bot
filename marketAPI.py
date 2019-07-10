@@ -17,7 +17,7 @@ def get_basic_quote(ticker: str) -> discord.Embed:
     :return: discord.Embed object containing message to be sent back to server
     """
 
-    page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + IEX_TOKEN)
+    page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + iexToken)
     json_string = json.loads(page.text)
     symbol = json_string["symbol"]
     companyName = json_string["companyName"]
@@ -91,7 +91,7 @@ def get_extended_quote(ticker: str) -> discord.Embed:
     :return: discord.Embed object containing message to be sent back to server
     """
 
-    page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + IEX_TOKEN)
+    page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + iexToken)
     json_string = json.loads(page.text)
     symbol = json_string["symbol"]
     companyName = json_string["companyName"]
