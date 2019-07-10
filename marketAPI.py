@@ -4,7 +4,7 @@ import discord
 import requests
 from datetime import datetime
 import json
-
+import os
 import utils
 
 iexToken = os.environ['IEX_TOKEN']
