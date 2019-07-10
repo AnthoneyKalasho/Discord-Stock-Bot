@@ -1,5 +1,5 @@
 beautifulsoup4==4.6.0
--e git+https://github.com/Rapptz/discord.py@master#egg=discord.py[voice]
+discord.py==1.2.3
 lxml==4.1.1
 requests==2.18.4
 
