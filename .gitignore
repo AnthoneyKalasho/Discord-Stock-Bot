@@ -1,5 +1,14 @@
 secrets.json
 
+# ignore virtual environment
+venv
+
+# ignore environment variables
+.env
+
+# ignore vscode specific stuff
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

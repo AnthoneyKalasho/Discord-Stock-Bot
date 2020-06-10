@@ -38,4 +38,4 @@ def should_parse_message(matches_len: int) -> bool:
     :return: bool
     """
 
-    return is_market_open() and 0 < matches_len < 6
+    return 0 < matches_len < 6
