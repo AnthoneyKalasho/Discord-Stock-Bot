@@ -30,7 +30,7 @@ class MyClient(discord.Client):
 
             else:
                 if matches_len > 0:
-                    await message.channel.send("Market is closed ya retard. Go do something else.")
+                    await message.channel.send("Market is closed. Go do something else.")
                 else:
                     pass
 
