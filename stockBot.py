@@ -7,10 +7,13 @@ import marketAPI as api
 import re
 import os
 
+intents = discord.Intents.default()
+intents.message_content = True
+
 TOKEN = os.environ['TOKEN']
 pattern_quote = re.compile(r'[$]([A-Za-z]+)[+]?')
 
-class MyClient(discord.Client()):
+class MyClient(discord.Client(intents=intents)):
     async def on_ready(self):
         await client.change_presence(status=discord.Status.online, activity=discord.Game("with Stonks"))
 
