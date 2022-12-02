@@ -8,7 +8,7 @@ import re
 import os
 
 intents = discord.Intents.default()
-intents.message_content = True
+intents.messages = True
 
 TOKEN = os.environ['TOKEN']
 pattern_quote = re.compile(r'[$]([A-Za-z]+)[+]?')
