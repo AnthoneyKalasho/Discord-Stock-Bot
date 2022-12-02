@@ -14,7 +14,7 @@ def get_basic_quote(ticker: str) -> discord.Embed:
     """
     Returns a discord.Embed object with basic quote info.
     :param ticker: stock ticker string (e.g. '$spy')
-    :return: discord.Embed object containing message to be sent back to server
+    :return: discord.Embed object containing message to be sent back to server 
     """
 
     page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + iexToken)
