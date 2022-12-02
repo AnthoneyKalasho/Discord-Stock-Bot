@@ -10,7 +10,7 @@ import os
 TOKEN = os.environ['TOKEN']
 pattern_quote = re.compile(r'[$]([A-Za-z]+)[+]?')
 
-class MyClient(discord.Client(intents=discord.Intents.default())):
+class MyClient(discord.Client()):
     async def on_ready(self):
         await client.change_presence(status=discord.Status.online, activity=discord.Game("with Stonks"))
 
