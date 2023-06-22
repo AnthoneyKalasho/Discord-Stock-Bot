@@ -18,7 +18,14 @@ def get_basic_quote(ticker: str) -> discord.Embed:
     """
 
     page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + iexToken)
-    json_string = json.loads(page.text)
+
+
+    try:
+        json_string = json.loads(page.text)
+    except json.decoder.JSONDecodeError:
+        print("Invalid or empty JSON received from IEX API")
+        return None
+    
     symbol = json_string["symbol"]
     companyName = json_string["companyName"]
     marketPercent = round(json_string["changePercent"] * 100, 3)
