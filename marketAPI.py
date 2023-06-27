@@ -8,7 +8,7 @@ import os
 import utils
 
 iexToken = os.environ['IEX_TOKEN']
-
+fmpToken = os.environ['FMP_TOKEN']
 
 def get_basic_quote(ticker: str) -> discord.Embed:
     """
@@ -90,28 +90,29 @@ def get_basic_quote(ticker: str) -> discord.Embed:
 
     return discord.Embed(title=title, url=url, description=description, color=0x006BB6)
 
+def get_basic_quote_fmp(ticker: str) -> discord.Embed:
 
-def get_extended_quote(ticker: str) -> discord.Embed:
-    """
-    Returns a discord.Embed object with extended quote info.
-    :param ticker: stock ticker string (e.g. '$spy+')
-    :return: discord.Embed object containing message to be sent back to server
-    """
+    page = requests.get('https://financialmodelingprep.com/api/v3/quote/' + ticker + '?apikey=' + fmpToken)
 
-    page = requests.get('https://cloud.iexapis.com/stable/stock/' + ticker.replace('+','').replace('$','') + '/quote?token=' + iexToken)
-    json_string = json.loads(page.text)
+
+    try:
+        json_string = json.loads(page.text)
+    except json.decoder.JSONDecodeError:
+        print("Invalid or empty JSON received from IEX API")
+        return None
+    
     symbol = json_string["symbol"]
-    companyName = json_string["companyName"]
-    marketPercent = round(json_string["changePercent"] * 100, 3)
-    latestPrice = json_string["latestPrice"]
+    companyName = json_string["name"]
+    marketPercent = round(json_string["changesPercentage"], 3)
+    latestPrice = json_string["price"]
     change = round(json_string["change"], 3)
     extendedHours = False
 
     now = datetime.now()
     if (5 <= (now.hour + (now.minute / 60)) <= 6.5) or (13 <= (now.hour + (now.minute / 60)) <= 14):
-        extendedPrice = json_string["extendedPrice"]
-        extendedChange = json_string["extendedChange"]
-        extendedChangePercent = round(json_string["extendedChangePercent"] * 100, 3)
+        extendedPrice = json_string["price"]
+        extendedChange = json_string["change"]
+        extendedChangePercent = round(json_string["changesPercentage"] * 100, 3)
         if extendedChangePercent >= 0:
             positive = "+"
         else:
@@ -163,3 +164,4 @@ def get_extended_quote(ticker: str) -> discord.Embed:
                                ")"])
 
     return discord.Embed(title=title, url=url, description=description, color=0x006BB6)
+

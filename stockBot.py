@@ -28,12 +28,8 @@ class MyClient(discord.Client):
 
             if utils.should_parse_message(matches_len):
                 for m in matches:
-                    if m[-1] == '+':
-                        embed = api.get_extended_quote(m)
-                        await message.channel.send(embed=embed)
-                    else:
-                        embed = api.get_basic_quote(m)
-                        await message.channel.send(embed=embed)
+                    embed = api.get_basic_quote_fmp(m)
+                    await message.channel.send(embed=embed)
 
             else:
                 if matches_len > 0:
