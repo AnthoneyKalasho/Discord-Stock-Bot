@@ -132,24 +132,11 @@ def get_basic_quote_fmp(ticker: str) -> discord.Embed:
     marketPercent = round(json_string["changesPercentage"], 3)
     latestPrice = json_string["price"]
     change = round(json_string["change"], 3)
-    extendedHours = False
 
-    now = datetime.now()
-    if (5 <= (now.hour + (now.minute / 60)) <= 6.5) or (13 <= (now.hour + (now.minute / 60)) <= 14):
-        extendedPrice = json_string["price"]
-        extendedChange = json_string["change"]
-        extendedChangePercent = round(json_string["changesPercentage"] * 100, 3)
-        if extendedChangePercent >= 0:
-            positive = "+"
-        else:
-            positive = ""
-
-    if utils.is_pre_market():
+    if utils.is_pre_market() or utils.is_after_hours():
         marketTime = "PM"
         extendedHours = True
-    elif utils.is_after_hours():
-        marketTime = "AH"
-        extendedHours = True
+        return discord.Embed(title="", url="", description="Market is closed. Go do something else", color=0x006BB6)
 
     if marketPercent >= 0:
         marketPercentString = "+" + str(marketPercent) + "%"
@@ -169,25 +156,6 @@ def get_basic_quote_fmp(ticker: str) -> discord.Embed:
                            " / ",
                            marketPercentString,
                            ")"])
-    if extendedHours:
-        description = "".join([str(round(latestPrice, 3)),
-                               " -> (",
-                               changeString,
-                               " / ",
-                               marketPercentString,
-                               ")",
-                               " | ",
-                               marketTime,
-                               " ",
-                               str(round(extendedPrice, 3)),
-                               " -> (",
-                               positive,
-                               str(extendedChange),
-                               " / ",
-                               positive,
-                               str(round(extendedChangePercent, 2)),
-                               "%",
-                               ")"])
 
     return discord.Embed(title=title, url=url, description=description, color=0x006BB6)
 
