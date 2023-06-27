@@ -10,6 +10,32 @@ import utils
 iexToken = os.environ['IEX_TOKEN']
 fmpToken = os.environ['FMP_TOKEN']
 
+try:
+    # For Python 3.0 and later
+    from urllib.request import urlopen
+except ImportError:
+    # Fall back to Python 2's urllib2
+    from urllib2 import urlopen
+
+import certifi
+import json
+
+def get_jsonparsed_data(url):
+    """
+    Receive the content of ``url``, parse it as JSON and return the object.
+
+    Parameters
+    ----------
+    url : str
+
+    Returns
+    -------
+    dict
+    """
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    return json.loads(data)
+
 def get_basic_quote(ticker: str) -> discord.Embed:
     """
     Returns a discord.Embed object with basic quote info.
@@ -92,11 +118,11 @@ def get_basic_quote(ticker: str) -> discord.Embed:
 
 def get_basic_quote_fmp(ticker: str) -> discord.Embed:
 
-    page = requests.get('https://financialmodelingprep.com/api/v3/quote/' + ticker + '?apikey=' + fmpToken)
+    url = 'https://financialmodelingprep.com/api/v3/quote/' + ticker + '?apikey=' + fmpToken
 
 
     try:
-        json_string = json.loads(page.text)
+        json_string = get_jsonparsed_data(url)[0]
     except json.decoder.JSONDecodeError:
         print("Invalid or empty JSON received from IEX API")
         return None
